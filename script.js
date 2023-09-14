@@ -81,10 +81,16 @@ if (formulario){
     });
 }
 
-if (formulario){
+formulario.addEventListener("submit", async (e) => {
+
+    e.preventDefault();
+    corHora();
+});
+
+function corHora(){
 
     var currentTime = new Date().getHours();
-    if (20 <= currentTime && currentTime < 22) {
+    if (13 <= currentTime && currentTime < 22) {
 
         document.body.style.backgroundColor = "red";
 
@@ -116,12 +122,12 @@ if (formulario){
 
         e.preventDefault();
 
-        const data = newDate();
+        const data = new Date();
         const dia = String(data.getDate()).padStart(2, '0');
         const mes = String(data.getMonth() + 1).padStart(2, '0');
         const ano = data.getFullYear();
 
-        document.getElementById('resposta3').innerHTML = 'Esses dados foram geradoss no dia' + dia + '/' + mes + '/' + ano;
+        document.getElementById('resposta3').innerHTML = 'Esses dados foram gerados no dia ' + dia + '/' + mes + '/' + ano;
 
     });
 }
