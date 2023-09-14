@@ -11,7 +11,7 @@ if (formulario){
         let pergunta = document.getElementById('campoPergunta').value;
         let inicioPergunta = 'Descreva 5 pontos turisticos de, citando apenas os seus nomes sem escrever como eles são, apenas a lista numerica com os pontos turisticos, faça em uma lista onde cada ponto fique em baixo do outro';
         pergunta = inicioPergunta + pergunta;
-  
+
         //Associação com o chatGpt
         await fetch ("https://api.openai.com/v1/completions", {
         
@@ -52,7 +52,7 @@ if (formulario){
         let pais = pergunta;
         let inicioPergunta = 'me de a previsão do tempo dos proximos 5 dias, fale o dia e a temperatura maxima e minima, e se vai chover ou não, quando dizer os dias escreva segunda feira etc, considere esses dados da  capital do país mas não cite ela.';
         pergunta = inicioPergunta + pergunta;
-        
+       
         //Associação com o chatGpt
         await fetch ("https://api.openai.com/v1/completions", {
         
@@ -73,10 +73,55 @@ if (formulario){
         })
         .then((resposta) => resposta.json())
         .then((dados) => {
-            document.getElementById('resposta2').innerHTML = 'Considerando a capital' + dados.choices[0].text;
+            document.getElementById('resposta2').innerHTML = 'Considerando a capital, ' + dados.choices[0].text;
         })
         .catch (() => {
             document.getElementById('resposta2').innerHTML = 'Sem resposta'; 
         });
+    });
+}
+
+if (formulario){
+
+    var currentTime = new Date().getHours();
+    if (20 <= currentTime && currentTime < 22) {
+
+        document.body.style.backgroundColor = "red";
+
+    }else if (7 <= currentTime && currentTime < 8) {
+
+        document.body.style.backgroundColor = "aliceblue";
+
+    }else if (8 <= currentTime && currentTime < 9) {
+
+        document.body.style.backgroundColor = "#E6E6FA";
+        
+    }else if (9 <= currentTime && currentTime < 10) {
+
+        document.body.style.backgroundColor = "#E0FFFF";
+        
+    }else if (10 <= currentTime && currentTime < 11) {
+
+        document.body.style.backgroundColor = "#FFFFF0";
+
+    }else if (11 <= currentTime && currentTime < 12) {
+            
+        document.body.style.backgroundColor = "#FFFACD";
+
+    }         
+}
+
+if (formulario){
+    formulario.addEventListener("submit", async (e) => {
+
+        e.preventDefault();
+
+        const data = newDate();
+        const dia = String(data.getDate()).padStart(2, '0');
+        const mes = String(data.getMonth() + 1).padStart(2, '0');
+        const ano = data.getFullYear();
+
+        document.getElementById('resposta3').innerHTML = 'Esses dados foram geradoss no dia' + dia + '/' + mes + '/' + ano;
+
     });
 }
