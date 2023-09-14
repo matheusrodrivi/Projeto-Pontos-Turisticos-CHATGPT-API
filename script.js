@@ -81,12 +81,6 @@ if (formulario){
     });
 }
 
-formulario.addEventListener("submit", async (e) => {
-
-    e.preventDefault();
-    corHora();
-});
-
 function corHora(){
 
     var currentTime = new Date().getHours();
@@ -121,6 +115,7 @@ if (formulario){
     formulario.addEventListener("submit", async (e) => {
 
         e.preventDefault();
+        corHora();
 
         const data = new Date();
         const dia = String(data.getDate()).padStart(2, '0');
