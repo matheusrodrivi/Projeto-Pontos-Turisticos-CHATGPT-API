@@ -1,5 +1,5 @@
 const formulario = document.getElementById('formulario')
-const OPENAI_API_KEY = "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";
+const OPENAI_API_KEY = "OPENAI_API_KEY";
 corHora();
 
 if (formulario){
