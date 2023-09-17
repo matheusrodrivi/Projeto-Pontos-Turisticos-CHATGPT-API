@@ -1,6 +1,6 @@
 const formulario = document.getElementById('formulario')
 const OPENAI_API_KEY = "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";
-//corHora();
+corHora();
 
 if (formulario){
 
@@ -36,9 +36,10 @@ if (formulario){
         .then((dados) => {
             //document.getElementById('pergunta').innerHTML = trecho;
             //document.getElementById('resposta').innerHTML = dados.choices[0].text;
-            // crie uma div
             
             var historic = document.getElementById('historic');
+
+            document.getElementById('status').style.display = 'none';
 
             var perguntaDiv = document.createElement('perguntaDiv');
             perguntaDiv.className = 'perguntaDiv';
@@ -50,9 +51,19 @@ if (formulario){
             perguntaDiv.appendChild(paragrafoPerguntaDiv);
             historic.appendChild(paragrafoPerguntaDiv);
 
+            var respostaDiv = document.createElement('respostaDiv');
+            respostaDiv.className = 'respostaDiv';
+
+            var paragrafoRespostaDiv = document.createElement('p');
+            paragrafoRespostaDiv.className = 'resposta';
+            paragrafoRespostaDiv.innerHTML = dados.choices[0].text;
+
+            respostaDiv.appendChild(paragrafoRespostaDiv);
+            historic.appendChild(paragrafoRespostaDiv);
+
         })
         .catch (() => {
-            document.getElementById('resposta').innerHTML = 'Sem resposta'; 
+            //document.getElementById('resposta').innerHTML = 'Sem resposta'; 
         });
     document.getElementById('botao').value = "Descobrindo!";
     });
@@ -90,17 +101,26 @@ if (formulario){
         })
         .then((resposta) => resposta.json())
         .then((dados) => {
-            document.getElementById('resposta2').innerHTML = dados.choices[0].text;   
+            var resposta2Div = document.createElement('resposta2Div');
+            resposta2Div.className = 'resposta2Div';
+            document.getElementById('status').style.display = 'none';
+
+            var paragrafoRespostaDiv2 = document.createElement('p');
+            paragrafoRespostaDiv2.className = 'resposta2';
+            paragrafoRespostaDiv2.innerHTML = dados.choices[0].text;
+
+            resposta2Div.appendChild(paragrafoRespostaDiv2);
+            historic.appendChild(paragrafoRespostaDiv2);
         })
         .catch (() => {
-            document.getElementById('resposta2').innerHTML = 'Sem resposta'; 
+
         });
         document.getElementById('botao').value = "Descobrir";
     });
 }
 
 //Função da cor de fundo padrão ao abrir o site // aplicativo
-/*function corHora(){
+function corHora(){
 
     var currentTime = new Date().getHours();
     if (6 <= currentTime && currentTime < 7) {
@@ -174,10 +194,10 @@ if (formulario){
                         
         document.body.style.backgroundColor = "#FFFACD";
     }   
-}*/
+}
 
 //Função que altera a cor ao clicar no botão
-/*function corBotao(){
+function corBotao(){
 
     var numero = Math.floor(Math.random() * 5) + 1;
     
@@ -193,20 +213,32 @@ if (formulario){
         document.body.style.backgroundColor = "purple";
     }
 
-}*/
+}
+
+var botaoCor = document.getElementById("botao");
+botaoCor.addEventListener("click", corBotao);
 
 if (formulario){
     formulario.addEventListener("submit", async (e) => {
 
         e.preventDefault();
-        //corBotao();
 
         const data = new Date();
         const dia = String(data.getDate()).padStart(2, '0');
         const mes = String(data.getMonth() + 1).padStart(2, '0');
         const ano = data.getFullYear();
         
-        document.getElementById('resposta3').innerHTML = 'Esses dados foram gerados no dia ' + dia + '/' + mes + '/' + ano;
+        let dados2 = 'Esses dados foram gerados no dia ' + dia + '/' + mes + '/' + ano;
+
+        var respostaDiv3 = document.createElement('resposta3Div');
+        respostaDiv3.className = 'resposta3Div';
+
+        var paragrafoRespostaDiv3 = document.createElement('p');
+        paragrafoRespostaDiv3.className = 'resposta3';
+        paragrafoRespostaDiv3.innerHTML = dados2;
+
+        respostaDiv3.appendChild(paragrafoRespostaDiv3);
+        historic.appendChild(paragrafoRespostaDiv3);
 
     });
 }
@@ -218,48 +250,6 @@ function sendMessage(){
     var status = document.getElementById('status');
     var botao = document.getElementById('botao');
 
+    status.style.display = 'block';
     status.innerHTML = 'Descobrindo...';
-    /* atenção a isso
-    botao.disabled = true;
-    botao.style.cursor = 'not-allowed';
-    */
 }
-
-/*
-function showHistoric(pergunta, r, resposta2){
-
-    var historic = document.getElementById('historic');
-
-    var boxMyMessage = document.createElement('div');
-    boxMyMessage.className = 'box-my-message';
-
-    var myMessage = document.createElement('p');
-    myMessage.className = 'my-message';
-    myMessage.innerHTML = pergunta;
-
-    boxMyMessage.appendChild(myMessage);
-    historic.appendChild(boxMyMessage);
-
-    var boxResponseMessage = document.createElement('div');
-    boxResponseMessage.className = 'box-response-message';
-
-    var chatResponse = document.createElement('p')
-    chatResponse.className = 'chat-message'
-    chatResponse.innerHTML = r;
-
-    boxMyMessage.appendChild(r);
-    historic.appendChild(boxResponseMessage)
-
-    var boxResponseMessage2 = document.createElement('div2');
-    boxResponseMessage2.className = 'box-response-message2';
-
-    var chatResponse2 = document.createElement('p')
-    chatResponse2.className = 'chat-message2'
-    chatResponse2.innerHTML = resposta2
-
-    boxResponseMessage2.appendChild(resposta2);
-    historic.appendChild(boxResponseMessage2)
-
-
-
-}*/
