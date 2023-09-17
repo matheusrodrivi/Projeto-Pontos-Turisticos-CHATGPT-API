@@ -1,6 +1,6 @@
 const formulario = document.getElementById('formulario')
-const OPENAI_API_KEY = "OPENAI_API_KEY";
-corHora();
+const OPENAI_API_KEY = "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";
+//corHora();
 
 if (formulario){
 
@@ -33,10 +33,10 @@ if (formulario){
         })
         .then((resposta) => resposta.json())
         .then((dados) => {
-            document.getElementById('resposta').innerHTML = dados.choices[0].text;
+            //document.getElementById('resposta').innerHTML = dados.choices[0].text;
         })
         .catch (() => {
-            document.getElementById('resposta').innerHTML = 'Sem resposta'; 
+            //document.getElementById('resposta').innerHTML = 'Sem resposta'; 
         });
     document.getElementById('botao').value = "Descobrindo!";
     });
@@ -74,17 +74,17 @@ if (formulario){
         })
         .then((resposta) => resposta.json())
         .then((dados) => {
-            document.getElementById('resposta2').innerHTML = 'Considerando a capital, ' + dados.choices[0].text;
+            //document.getElementById('resposta2').innerHTML = 'Considerando a capital, ' + dados.choices[0].text;
         })
         .catch (() => {
-            document.getElementById('resposta2').innerHTML = 'Sem resposta'; 
+            //document.getElementById('resposta2').innerHTML = 'Sem resposta'; 
         });
         document.getElementById('botao').value = "Descobrir";
     });
 }
 
 //Função da cor de fundo padrão ao abrir o site // aplicativo
-function corHora(){
+/*function corHora(){
 
     var currentTime = new Date().getHours();
     if (6 <= currentTime && currentTime < 7) {
@@ -158,10 +158,10 @@ function corHora(){
                         
         document.body.style.backgroundColor = "#FFFACD";
     }   
-}
+}*/
 
 //Função que altera a cor ao clicar no botão
-function corBotao(){
+/*function corBotao(){
 
     var numero = Math.floor(Math.random() * 5) + 1;
     
@@ -177,7 +177,7 @@ function corBotao(){
         document.body.style.backgroundColor = "purple";
     }
 
-}
+}*/
 
 if (formulario){
     formulario.addEventListener("submit", async (e) => {
@@ -190,7 +190,23 @@ if (formulario){
         const mes = String(data.getMonth() + 1).padStart(2, '0');
         const ano = data.getFullYear();
         
-        document.getElementById('resposta3').innerHTML = 'Esses dados foram gerados no dia ' + dia + '/' + mes + '/' + ano;
+        //document.getElementById('resposta3').innerHTML = 'Esses dados foram gerados no dia ' + dia + '/' + mes + '/' + ano;
 
     });
+}
+
+function sendMessage(){
+    let pergunta = document.getElementById('campoPergunta').value;
+    let inicioPergunta = 'Me mostre os pontos turisticos de ' + pergunta;
+
+    var status = document.getElementById('status');
+    var botao = document.getElementById('botao');
+
+    status.innerHTML = 'Descobrindo...';
+    // atenção a isso
+    botao.disabled = true;
+    botao.style.cursor = 'not-allowed';
+
+    
+
 }
