@@ -10,6 +10,7 @@ if (formulario){
         e.preventDefault();
 
         let pergunta = document.getElementById('campoPergunta').value;
+        let trecho = 'Me mostre os 5 pontos turisticos mais importantes de ' + pergunta;
         let inicioPergunta = 'Descreva 5 pontos turisticos de, citando apenas os seus nomes sem escrever como eles são, apenas a lista numerica com os pontos turisticos, faça em uma lista onde cada ponto fique em baixo do outro';
         pergunta = inicioPergunta + pergunta;
 
@@ -33,10 +34,25 @@ if (formulario){
         })
         .then((resposta) => resposta.json())
         .then((dados) => {
+            //document.getElementById('pergunta').innerHTML = trecho;
             //document.getElementById('resposta').innerHTML = dados.choices[0].text;
+            // crie uma div
+            
+            var historic = document.getElementById('historic');
+
+            var perguntaDiv = document.createElement('perguntaDiv');
+            perguntaDiv.className = 'perguntaDiv';
+
+            var paragrafoPerguntaDiv = document.createElement('p');
+            paragrafoPerguntaDiv.className = 'pergunta';
+            paragrafoPerguntaDiv.innerHTML = trecho;
+
+            perguntaDiv.appendChild(paragrafoPerguntaDiv);
+            historic.appendChild(paragrafoPerguntaDiv);
+
         })
         .catch (() => {
-            //document.getElementById('resposta').innerHTML = 'Sem resposta'; 
+            document.getElementById('resposta').innerHTML = 'Sem resposta'; 
         });
     document.getElementById('botao').value = "Descobrindo!";
     });
@@ -74,10 +90,10 @@ if (formulario){
         })
         .then((resposta) => resposta.json())
         .then((dados) => {
-            //document.getElementById('resposta2').innerHTML = 'Considerando a capital, ' + dados.choices[0].text;
+            document.getElementById('resposta2').innerHTML = dados.choices[0].text;   
         })
         .catch (() => {
-            //document.getElementById('resposta2').innerHTML = 'Sem resposta'; 
+            document.getElementById('resposta2').innerHTML = 'Sem resposta'; 
         });
         document.getElementById('botao').value = "Descobrir";
     });
@@ -183,14 +199,14 @@ if (formulario){
     formulario.addEventListener("submit", async (e) => {
 
         e.preventDefault();
-        corBotao();
+        //corBotao();
 
         const data = new Date();
         const dia = String(data.getDate()).padStart(2, '0');
         const mes = String(data.getMonth() + 1).padStart(2, '0');
         const ano = data.getFullYear();
         
-        //document.getElementById('resposta3').innerHTML = 'Esses dados foram gerados no dia ' + dia + '/' + mes + '/' + ano;
+        document.getElementById('resposta3').innerHTML = 'Esses dados foram gerados no dia ' + dia + '/' + mes + '/' + ano;
 
     });
 }
@@ -203,10 +219,47 @@ function sendMessage(){
     var botao = document.getElementById('botao');
 
     status.innerHTML = 'Descobrindo...';
-    // atenção a isso
+    /* atenção a isso
     botao.disabled = true;
     botao.style.cursor = 'not-allowed';
-
-    
-
+    */
 }
+
+/*
+function showHistoric(pergunta, r, resposta2){
+
+    var historic = document.getElementById('historic');
+
+    var boxMyMessage = document.createElement('div');
+    boxMyMessage.className = 'box-my-message';
+
+    var myMessage = document.createElement('p');
+    myMessage.className = 'my-message';
+    myMessage.innerHTML = pergunta;
+
+    boxMyMessage.appendChild(myMessage);
+    historic.appendChild(boxMyMessage);
+
+    var boxResponseMessage = document.createElement('div');
+    boxResponseMessage.className = 'box-response-message';
+
+    var chatResponse = document.createElement('p')
+    chatResponse.className = 'chat-message'
+    chatResponse.innerHTML = r;
+
+    boxMyMessage.appendChild(r);
+    historic.appendChild(boxResponseMessage)
+
+    var boxResponseMessage2 = document.createElement('div2');
+    boxResponseMessage2.className = 'box-response-message2';
+
+    var chatResponse2 = document.createElement('p')
+    chatResponse2.className = 'chat-message2'
+    chatResponse2.innerHTML = resposta2
+
+    boxResponseMessage2.appendChild(resposta2);
+    historic.appendChild(boxResponseMessage2)
+
+
+
+}*/

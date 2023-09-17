@@ -62,3 +62,58 @@ body{
     cursor: pointer;
     transition: .4s;
 }
+
+#historic{
+    padding: 1rem;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    height: 100%;
+}
+
+.perguntaDiv{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.respostaDiv{
+    display: flex;
+    justify-content: flex-start;
+}
+
+.resposta2Div{
+    display: flex;
+    justify-content: flex-start;
+}
+
+.resposta3Div{
+    display: flex;
+    justify-content: flex-start;
+}
+
+.pergunta{
+    background-color: var(--gray);
+}
+
+.resposta {
+    background-color: var(--gray);
+}
+
+.resposta2 {
+    background-color: var(--gray);
+}
+
+.resposta3 {
+    background-color: var(--gray);
+}
+
+.pergunta,
+.resposta,
+.resposta2,
+.resposta3{
+    border-radius: 10px;
+    padding: 1rem;
+    color: var(--white);
+    margin: 0;
+}
